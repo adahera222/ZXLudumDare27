@@ -1,13 +1,32 @@
 #pragma strict
 
-var moveDir = new Vector3(0, 0, 0);
-var atkDir = new Vector3(0, 0, 0);
+// Move, attack, and action, made in "plan", done in "exec"
+var moveDir = Vector3(0, 0, 0);
+var atkDir = Vector3(0, 0, 0);
 var action = 0;
-var controller : GameObject;
-var timerObj : Timer;
-var unitList : ListOfEntities;
+
+/* Misc Statistics */
+// Selected or not - can only give commands when selected
 var selected = false;
+// Pretty self-explanitory - can it move? Controlled externally (mostly)
+var canMove = true;
+// Max hp (potentially unused)
+var maxHp = 2;
+// Current hp
+var hp = 2;
+
+/* Controller Data */
+// Controller object, set in inspector
+var controller : GameObject;
+// Timer object, inherited from controller
+var timerObj : Timer;
+// List of units, inherited from controller
+var unitList : ListOfEntities;
+
+/* Internal Components */
+// Used for changing color upon selection, retrieved in code
 var mat : Renderer;
+// Used to show intended direction, set in inspector
 var arrow : Transform;
 
 function Start() {
@@ -26,39 +45,22 @@ function Update () {
 		// If we're in the planning step, assign actions
 		if(timerObj.turn == "plan") {
 			// Get movement from axis 1. != so that it doesn't set it while the stick is neutral
-			var moveHor = Input.GetAxisRaw("Horizontal1");
-			var moveVert = Input.GetAxisRaw("Vertical1");
+			var moveHor = Input.GetAxisRaw("MoveHoriz");
+			var moveVert = Input.GetAxisRaw("MoveVert");
 			if(moveHor != 0 || moveVert != 0) {
 				moveDir.x = moveHor;
-				moveDir.z = moveVert;
+				moveDir.z = -moveVert; // Because the Ouya controller is weird.
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
-				
-				Debug.Log(moveHor);
-				Debug.Log(moveVert);
 			}
 			
-			/*/ Get attack direction from axis 2
-			var atkHor = Input.GetAxisRaw("Horizontal2");
-			var atkVert = Input.GetAxisRaw("Vertical2");
-			if(atkHor != 0) {
-				atkDir.x = atkHor / Mathf.Abs(atkHor);
+			// Get attack direction from axis 2
+			var atkHor = Input.GetAxisRaw("AtkHoriz");
+			var atkVert = Input.GetAxisRaw("AtkVert");
+			if(atkHor != 0 || atkVert != 0) {
+				atkDir.x = atkHor;
+				atkDir.z = -atkVert; // Because the Ouya controller is weird.
+				atkDir.Normalize();
 			}
-			if(atkVert != 0) {
-				atkDir.z = atkVert / Mathf.Abs(atkVert);
-			}
-			// */
-			
-			/*/ Get action type from buttons
-			if(Input.GetButtonDown("Action1")) {
-				action = 1;
-			}
-			if(Input.GetButtonDown("Action2")) {
-				action = 2;
-			}
-			// */
-			
-			// Handle next and previous buttons
-			
 		}
 	}
 	else {
@@ -72,21 +74,22 @@ function Update () {
 		selected = false;
 	
 		// Apply movement in moveDir
-		transform.position += moveDir * Time.deltaTime;
-		
-		// For now, simply rotate towards atkDir
-		//transform.rotation = Quaternion.Euler(atkDir);
+		if(canMove)
+			transform.position += moveDir * Time.deltaTime;
 		
 		// And action isn't used for now, so...
 	}
 	
 	// If we're coming up on a new planning phase, clear the current values
 	if(timerObj.turn == "wait" && timerObj.prevTurn == "exec") {
-		//moveDir = new Vector3(0, 0, 0);
-		//atkDir = new Vector3(0, 0, 0);
+		// You can potentially go in a new direction
+		canMove = true;
 	}
+	
+	// Rotate unit to look towards atkDir
+	gameObject.transform.forward = atkDir;
 	
 	// Make an arrow!
 	arrow.rotation = Quaternion.LookRotation(-moveDir);
-	arrow.localPosition = moveDir;
+	arrow.position = transform.position + moveDir;
 }
