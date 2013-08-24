@@ -34,10 +34,10 @@ function ButtonAction(ButtonIndex:int){
 switch(ButtonIndex)
 {
 case 0:
-	//Start - go to next scene
+	Application.Quit();
 	break;
 case 1:
-	//quit?
+	Application.LoadLevel(1);
 	break;
 default://options? maybe buy other maps eventually?
 	Debug.Log("You fail standing up school");//mr. blah
