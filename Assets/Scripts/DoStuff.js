@@ -57,10 +57,7 @@ function Update () {
 			// */
 			
 			// Handle next and previous buttons
-			if(Input.GetAxisRaw("Switch") < 0)
-				unitList.Previous();
-			if(Input.GetAxisRaw("Switch") > 0)
-				unitList.Next();
+			
 		}
 	}
 	else {
@@ -84,7 +81,7 @@ function Update () {
 	
 	// If we're coming up on a new planning phase, clear the current values
 	if(timerObj.turn == "wait" && timerObj.prevTurn == "exec") {
-		moveDir = new Vector3(0, 0, 0);
-		atkDir = new Vector3(0, 0, 0);
+		//moveDir = new Vector3(0, 0, 0);
+		//atkDir = new Vector3(0, 0, 0);
 	}
 }

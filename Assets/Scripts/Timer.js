@@ -18,7 +18,7 @@ function Update () {
 	currTime += Time.deltaTime;
 	
 	// If you're planning, go to wait for a second
-	if(turn == "plan" && currTime >= turnTime) {
+	if(turn == "plan" && (currTime >= turnTime || Input.GetButtonDown("EndTurn"))) {
 		currTime = 0;
 		turn = "wait";
 		prevTurn = "plan";
@@ -41,7 +41,7 @@ function Update () {
 	}
 	
 	// If you're executing, go to the wait phase
-	if(turn == "exec" && currTime >= turnTime) {
+	if(turn == "exec" && (currTime >= turnTime || Input.GetButtonDown("EndTurn"))) {
 		currTime = 0;
 		turn = "wait";
 		prevTurn = "exec";
