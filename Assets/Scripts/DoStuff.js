@@ -32,13 +32,13 @@ function Update () {
 				moveDir.x = moveHor;
 				moveDir.z = moveVert;
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
-				if(Input.GetButtonDown("Deselect")){
-					moveDir=Vector3.zero;
-				}
-				Debug.Log(moveHor);
-				Debug.Log(moveVert);
+				
+				//Debug.Log(moveHor);
+				//Debug.Log(moveVert);
 			}
-			
+			if(Input.GetButtonDown("Deselect")){
+					moveDir=Vector3.zero;
+			}
 			/*/ Get attack direction from axis 2
 			var atkHor = Input.GetAxisRaw("Horizontal2");
 			var atkVert = Input.GetAxisRaw("Vertical2");

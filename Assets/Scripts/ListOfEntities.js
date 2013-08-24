@@ -7,7 +7,7 @@ var timer:Timer;
 var lastSelectedUnit=0;
 
 var selectMod="Units";
-var homeBase:Transform;
+var homeBase:BaseScript;
 
 function Start(){
 timer=gameObject.GetComponent(Timer);
@@ -15,25 +15,33 @@ timer=gameObject.GetComponent(Timer);
 
 function Update(){
 	if(timer.turn=="plan"){
-	if(Input.GetButtonDown("Units")){selectMod="Units";}
+	if(Input.GetButtonDown("Units")){
+		selectMod="Units";
+		units[currUnit].GetComponent(DoStuff).selected = true;
+		}
 	else if(Input.GetButtonDown("Construct")){selectMod="Construct";}
 	else if(Input.GetButtonDown("Harvesters")){selectMod="Harvesters";}
 	if(selectMod=="Units"){
+		Camera.main.transform.position.x=units[currUnit].transform.position.x;
+		Camera.main.transform.position.z=units[currUnit].transform.position.z;
 		if(Input.GetButtonDown("Switch")){
 			if(Input.GetAxisRaw("Switch") < 0)
 				Previous();
 			if(Input.GetAxisRaw("Switch") > 0)
 				Next();
-				]
-			Camera.main.transform.x=units[currUnit].transform.x;
-			Camera.main.transform.z=units[currUnit].transform.z;
 		}
 	}
-	else if (selectMod=="Construct"){
-	units[currUnit].GetComponent(DoStuff).selected = false;
-	Camera.main.transform.x=homeBase.x;
-			Camera.main.transform.z=homeBase.z;
-	}
+	else{units[currUnit].GetComponent(DoStuff).selected = false;}
+	 if (selectMod=="Construct")
+		{
+		homeBase.selected=true;
+		Camera.main.transform.position.x=homeBase.GetComponent(Transform).position.x;
+		Camera.main.transform.position.z=homeBase.GetComponent(Transform).position.z;
+		}
+		else{homeBase.selected=false;}
+		if(selectMod=="harvesters"){
+		//DoStuff with harvesters
+		}
 	}
 }
 
