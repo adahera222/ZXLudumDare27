@@ -32,7 +32,9 @@ function Update () {
 				moveDir.x = moveHor;
 				moveDir.z = moveVert;
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
-				
+				if(Input.GetButtonDown("Deselect")){
+					moveDir=Vector3.zero;
+				}
 				Debug.Log(moveHor);
 				Debug.Log(moveVert);
 			}

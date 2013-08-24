@@ -6,18 +6,34 @@ var numUnits = 0;
 var timer:Timer;
 var lastSelectedUnit=0;
 
+var selectMod="Units";
+var homeBase:Transform;
+
 function Start(){
 timer=gameObject.GetComponent(Timer);
 }
 
 function Update(){
 	if(timer.turn=="plan"){
+	if(Input.GetButtonDown("Units")){selectMod="Units";}
+	else if(Input.GetButtonDown("Construct")){selectMod="Construct";}
+	else if(Input.GetButtonDown("Harvesters")){selectMod="Harvesters";}
+	if(selectMod=="Units"){
 		if(Input.GetButtonDown("Switch")){
 			if(Input.GetAxisRaw("Switch") < 0)
 				Previous();
 			if(Input.GetAxisRaw("Switch") > 0)
 				Next();
+				]
+			Camera.main.transform.x=units[currUnit].transform.x;
+			Camera.main.transform.z=units[currUnit].transform.z;
 		}
+	}
+	else if (selectMod=="Construct"){
+	units[currUnit].GetComponent(DoStuff).selected = false;
+	Camera.main.transform.x=homeBase.x;
+			Camera.main.transform.z=homeBase.z;
+	}
 	}
 }
 
@@ -42,6 +58,6 @@ function Add(obj : GameObject) {
 
 function BeginTurn() {
 	if(numUnits > 0) {
-		units[0].GetComponent(DoStuff).selected = true;
+		units[currUnit].GetComponent(DoStuff).selected = true;
 	}
 }
