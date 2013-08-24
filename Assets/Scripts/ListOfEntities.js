@@ -4,6 +4,7 @@ var units = new GameObject[100];
 var currUnit = 0;
 var numUnits = 0;
 var timer:Timer;
+var lastSelectedUnit=0;
 
 function Start(){
 timer=gameObject.GetComponent(Timer);

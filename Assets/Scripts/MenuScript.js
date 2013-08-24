@@ -25,7 +25,7 @@ else if (Input.GetAxisRaw("Vertical1")<-.5){
 	selectedLast=true;
 }
 else {selectedLast=false;}
-if(Input.GetButtonDown("Button1")){
+if(Input.GetButtonDown("Units")){
 ButtonAction(selectedButton);
 }
 }
