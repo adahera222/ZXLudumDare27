@@ -8,6 +8,7 @@ var timerObj : Timer;
 var unitList : ListOfEntities;
 var selected = false;
 var mat : Renderer;
+var arrow : Transform;
 
 function Start() {
 	timerObj = controller.GetComponent(Timer);
@@ -84,4 +85,8 @@ function Update () {
 		//moveDir = new Vector3(0, 0, 0);
 		//atkDir = new Vector3(0, 0, 0);
 	}
+	
+	// Make an arrow!
+	arrow.rotation = Quaternion.LookRotation(-moveDir);
+	arrow.localPosition = moveDir;
 }
