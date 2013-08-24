@@ -15,7 +15,6 @@ function Start() {
 	unitList = controller.GetComponent(ListOfEntities);
 	mat = gameObject.GetComponent(Renderer);
 	unitList.Add(gameObject);
-	arrow = gameObject.GetComponentInChildren(Transform);
 }
 
 function Update () {
@@ -88,6 +87,6 @@ function Update () {
 	}
 	
 	// Make an arrow!
-	arrow.transform.rotation = Quaternion.Euler(moveDir);
-	arrow.transform.position = moveDir;
+	arrow.rotation = Quaternion.LookRotation(-moveDir);
+	arrow.localPosition = moveDir;
 }
