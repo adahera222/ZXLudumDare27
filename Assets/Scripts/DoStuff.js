@@ -8,12 +8,14 @@ var timerObj : Timer;
 var unitList : ListOfEntities;
 var selected = false;
 var mat : Renderer;
+var arrow : Transform;
 
 function Start() {
 	timerObj = controller.GetComponent(Timer);
 	unitList = controller.GetComponent(ListOfEntities);
 	mat = gameObject.GetComponent(Renderer);
 	unitList.Add(gameObject);
+	arrow = gameObject.GetComponentInChildren(Transform);
 }
 
 function Update () {
@@ -84,4 +86,8 @@ function Update () {
 		//moveDir = new Vector3(0, 0, 0);
 		//atkDir = new Vector3(0, 0, 0);
 	}
+	
+	// Make an arrow!
+	arrow.transform.rotation = Quaternion.Euler(moveDir);
+	arrow.transform.position = moveDir;
 }
