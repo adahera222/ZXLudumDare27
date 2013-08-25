@@ -22,7 +22,7 @@ function Update() {
 			tempUnit.GetComponent(DoStuff).selected = true;
 		}
 		else if(Input.GetButtonDown("Construct")) {selectMod = "Construct";}
-		else if(Input.GetButtonDown("Harvesters")) {selectMod = "Harvesters";}
+		//else if(Input.GetButtonDown("Harvesters")) {selectMod = "Harvesters";}
 		if(selectMod=="Units") {
 			tempUnit = units[currUnit];
 			Camera.main.transform.position.x = tempUnit.transform.position.x;
@@ -43,9 +43,9 @@ function Update() {
 		Camera.main.transform.position.z = homeBase.GetComponent(Transform).position.z;
 	}
 	else {homeBase.selected=false;}
-	if(selectMod == "harvesters") {
+	//if(selectMod == "harvesters") {
 		//DoStuff with harvesters
-	}
+	//}
 }
 
 function Next() {
@@ -68,7 +68,15 @@ function Previous() {
 
 function BeginTurn() {
 	if(units.length > 0) {
-		var tempUnit : GameObject = units[0];
-		tempUnit.GetComponent(DoStuff).selected = true;
+		if(selectMod=="Units"){
+			var tempUnit : GameObject = units[currUnit];
+			tempUnit.GetComponent(DoStuff).selected = true;
+			Camera.main.transform.position.x = tempUnit.transform.position.x;
+			Camera.main.transform.position.z = tempUnit.transform.position.z;
+		}
+	}
+	if(selectMod=="Construct"){
+		Camera.main.transform.position.x = homeBase.GetComponent(Transform).position.x;
+		Camera.main.transform.position.z = homeBase.GetComponent(Transform).position.z;
 	}
 }
