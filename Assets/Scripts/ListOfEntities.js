@@ -1,47 +1,50 @@
 #pragma strict
 
-var units = new GameObject[100];
+var units = new Array();
 var currUnit = 0;
-var numUnits = 0;
-var timer:Timer;
-var lastSelectedUnit=0;
+var timer : Timer;
 
 function Start(){
-timer=gameObject.GetComponent(Timer);
+	timer = gameObject.GetComponent(Timer);
 }
 
 function Update(){
 	if(timer.turn=="plan"){
-		if(Input.GetButtonDown("Switch")){
-			if(Input.GetAxisRaw("Switch") < 0)
-				Previous();
-			if(Input.GetAxisRaw("Switch") > 0)
-				Next();
+		if(Input.GetButtonDown("Previous")) {
+			Debug.Log("Previous called...");
+			Previous();
+		}
+		if(Input.GetButtonDown("Next")) {
+			Debug.Log("Next called...");
+			Next();
 		}
 	}
 }
 
 function Next() {
-	units[currUnit].GetComponent(DoStuff).selected = false;
-	currUnit+=1;
-	if (currUnit>=numUnits){currUnit=0;}
-	units[currUnit].GetComponent(DoStuff).selected = true;
+	Debug.Log("Next invoked.");
+	var tempUnit : GameObject = units[currUnit];
+	tempUnit.GetComponent(DoStuff).selected = false;
+	currUnit++;
+	if (currUnit>=units.length) { currUnit=0; }
+	tempUnit = units[currUnit];
+	tempUnit.GetComponent(DoStuff).selected = true;
 }
 
 function Previous() {
-	units[currUnit].GetComponent(DoStuff).selected = false;
+	Debug.Log("Previous invoked");
+	var tempUnit : GameObject = units[currUnit];
+	tempUnit.GetComponent(DoStuff).selected = false;
 	currUnit-=1;
-	if (currUnit<0){currUnit=numUnits-1;}
-	units[currUnit].GetComponent(DoStuff).selected = true;
-}
-
-function Add(obj : GameObject) {
-	units[numUnits] = obj;
-	numUnits += 1;
+	if (currUnit<0){currUnit=units.length - 1;}
+	tempUnit = units[currUnit];
+	tempUnit.GetComponent(DoStuff).selected = true;
 }
 
 function BeginTurn() {
-	if(numUnits > 0) {
-		units[0].GetComponent(DoStuff).selected = true;
+	if(units.length > 0) {
+		var tempUnit : GameObject = units[0];
+		Debug.Log(units.length);
+		tempUnit.GetComponent(DoStuff).selected = true;
 	}
 }

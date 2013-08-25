@@ -5,7 +5,7 @@ var stuffComp : DoStuff;
 
 /* Attack Stats */
 // Angle of attack
-var atkAngle = 30f;
+var atkAngle = 60f;
 // Attack cooldown
 var atkCool = 0.5f;
 // Current attack's cooldown
@@ -22,22 +22,21 @@ function Update() {
 		atkCurr -= Time.deltaTime;
 }
 
-function OnCollisionEnter(collide : Collision) {
-	// Can't move once you're engaged!
-	stuffComp.canMove = false;
-}
-
-function OnCollision(collide : Collision) {
+function OnTriggerStay(collide : Collider) {
 	// If it's a tree or they're on your team, don't shoot
 	if(collide.gameObject.tag == "Env" || collide.gameObject.tag == gameObject.tag)
 		return;
+
+	stuffComp.canMove = false;
 
 	if(atkCurr <= 0)
 	{
 		// Get angle of rightmost bound
 		var rightVect = Quaternion.AngleAxis(-atkAngle / 2, Vector3.up) * stuffComp.atkDir;
+		Debug.DrawRay(transform.position, rightVect * 20, Color.white, 0.5);
 		// Get angle of leftmost bound
 		var leftVect = Quaternion.AngleAxis(atkAngle / 2, Vector3.up) * stuffComp.atkDir;
+		Debug.DrawRay(transform.position, leftVect * 20, Color.red, 0.5);
 		// Get relative vector of enemy
 		var enemyVect = collide.transform.position - gameObject.transform.position;
 		// Compare angles
@@ -48,7 +47,7 @@ function OnCollision(collide : Collision) {
 	}
 }
 
-function OnCollisionExit(collide : Collision) {
+function OnTriggerExit() {
 	// Awesome, he's dead. You can move again.
 	stuffComp.canMove = true;
 }

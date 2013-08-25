@@ -30,13 +30,19 @@ var mat : Renderer;
 var arrow : Transform;
 
 function Start() {
+	// Get all the controller components for future reference
 	timerObj = controller.GetComponent(Timer);
 	unitList = controller.GetComponent(ListOfEntities);
 	mat = gameObject.GetComponent(Renderer);
-	unitList.Add(gameObject);
+	// Add yourself to the list of units
+	unitList.units.Add(gameObject);
 }
 
 function Update () {
+	if(hp <= 0) {
+		unitList.units.Remove(gameObject);
+		Destroy(gameObject);
+	}
 	if(selected)
 	{
 		// Make 'im green, Jim!
@@ -64,7 +70,7 @@ function Update () {
 		}
 	}
 	else {
-		// Make 'im red, Jim!
+		// He's red, Jim!
 		mat.material.color = Color.red;
 	}
 		
