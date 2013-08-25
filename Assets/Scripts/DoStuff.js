@@ -58,6 +58,9 @@ function Update () {
 				moveDir.z = -moveVert; // Because the Ouya controller is weird.
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
 			}
+			if(Input.GetButtonDown("Deselect")){
+					moveDir=Vector3.zero;
+			}
 			
 			// Get attack direction from axis 2
 			var atkHor = Input.GetAxisRaw("AtkHoriz");
