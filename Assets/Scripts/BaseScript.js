@@ -17,6 +17,7 @@ buildGuidePlane.position.y=20;
 		var placeVector=Vector3(Mathf.Cos(2*Mathf.PI/constructables.length*i),0,Mathf.Sin(2*Mathf.PI/constructables.length*i));
 		var newUnit=Instantiate(constructables[i],transform.position+placeVector,Quaternion.identity);
 		newUnit.GetComponent(DoStuff).controller=controller;
+		newUnit.tag=gameObject.tag;
 	}
 }
 
@@ -29,6 +30,7 @@ if(buildClock>9.9){
 buildClock-=9.9;
 var newUnit=Instantiate(currentBuild,transform.position+outputLocation,Quaternion.identity);
 newUnit.GetComponent(DoStuff).controller=controller;
+newUnit.tag=gameObject.tag;
 }
 }}
 if(nextInQueue&&!currentBuild){

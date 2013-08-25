@@ -49,7 +49,7 @@ function Update () {
 		mat.material.color = Color.green;
 		
 		// If we're in the planning step, assign actions
-		if(timerObj.turn == "plan") {
+		if(timerObj.turn == "plan"&&unitList.selectMod=="Units") {
 			// Get movement from axis 1. != so that it doesn't set it while the stick is neutral
 			var moveHor = Input.GetAxisRaw("MoveHoriz");
 			var moveVert = Input.GetAxisRaw("MoveVert");
@@ -104,10 +104,20 @@ function Update () {
 }
 
 function OnCollisionStay(collide : Collision) {
+Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they're not colliding?
 	// If it's a projectile from the other team, take some damage
 	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
 		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
 		hp -= 1;
 		Destroy(collide.gameObject);
 	}
+}
+
+function OnCollisionEnter(collide:Collision){
+	Debug.Log("Collided");
+	if (collide.gameObject.tag=="Env"){
+	Debug.Log("with a wall");
+	transform.position-=moveDir*Time.deltaTime;
+	moveDir=Vector3.zero;
+	canMove=false;}//seems like it should fix the problem.
 }

@@ -23,6 +23,7 @@ function Update() {
 }
 
 function OnCollisionStay(collide : Collision) {
+Debug.Log("Is any of this getting called?");
 	// If it's on your team, don't shoot and don't collide
 	if(collide.gameObject.tag == gameObject.tag)
 		return;

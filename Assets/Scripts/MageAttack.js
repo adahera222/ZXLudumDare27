@@ -25,7 +25,7 @@ function Update() {
 					// Note that we got an enemy
 					enemyPresent = true;
 					// Do damage at a rate of 1/s
-					hitfo.collider.gameObject.GetComponent(DoStuff).hp -= Time.deltaTime;
+					hitfo.collider.GetComponent(DoStuff).hp -= Time.deltaTime;
 				}
 			}
 			// If we didn't get an enemy, turn the FREAKIN' EPIC partical system off :(
@@ -40,7 +40,10 @@ function OnCollisionStay(collide : Collision) {
 	if(collide.gameObject.tag == gameObject.tag)
 		return;
 
+	// If it's a tree, don't shoot but do collide
 	stuffComp.canMove = false;
+	if(collide.gameObject.tag == "Env")
+		return;
 }
 
 function OnCollisionExit() {

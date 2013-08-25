@@ -5,6 +5,7 @@ var currUnit = 0;
 var timer : Timer;
 var selectMod="Units";
 var homeBase : BaseScript;
+var playerNum:int;
 
 function Start() {
 	timer = gameObject.GetComponent(Timer);
