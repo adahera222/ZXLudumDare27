@@ -11,6 +11,7 @@ var homeBase:BaseScript;
 
 function Start(){
 timer=gameObject.GetComponent(Timer);
+homeBase.controller=gameObject;
 homeBase.timer=timer;
 }
 

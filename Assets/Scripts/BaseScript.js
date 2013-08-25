@@ -12,11 +12,16 @@ var timer:Timer;
 var controller:GameObject;
 
 function Start () {
-timer=controller.GetComponent(Timer);
+buildGuidePlane.position.y=20;
+	for(var i=0;i<constructables.length;i+=1){
+		var placeVector=Vector3(Mathf.Cos(2*Mathf.PI/constructables.length*i),0,Mathf.Sin(2*Mathf.PI/constructables.length*i));
+		Instantiate(constructables[i],transform.position+placeVector,Quaternion.identity);
+	}
 }
 
 function Update () {
 if (timer.turn=="exec"){
+selected=false;
 if(currentBuild){
 buildClock+=Time.deltaTime;
 if(buildClock>9.9){
@@ -31,7 +36,7 @@ nextInQueue=null;
 }
 
 
-
+if(timer.turn=="plan"){
 if(selected){
 var stickVector=Vector2(Input.GetAxisRaw("Horizontal1"),Input.GetAxisRaw("Vertical1"));
 buildGuidePlane.position.y=transform.position.y;
@@ -50,7 +55,10 @@ var stickVector3=Vector3(stickVector.x,0,stickVector.y);
 	nextInQueue=constructables[toBuildIndex];
 var stick2Vector=Vector3(Input.GetAxisRaw("Horizontal2"),0,Input.GetAxisRaw("Vertical2"));
 if(stick2Vector.magnitude>.5){outputLocation=stick2Vector.normalized;}
+outputLocation=stickVector3;
 }
+}
+else{buildGuidePlane.position.y=20;}
 }
 else{buildGuidePlane.position.y=20;}
 }
