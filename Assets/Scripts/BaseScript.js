@@ -15,7 +15,8 @@ function Start () {
 buildGuidePlane.position.y=20;
 	for(var i=0;i<constructables.length;i+=1){
 		var placeVector=Vector3(Mathf.Cos(2*Mathf.PI/constructables.length*i),0,Mathf.Sin(2*Mathf.PI/constructables.length*i));
-		Instantiate(constructables[i],transform.position+placeVector,Quaternion.identity);
+		var newUnit=Instantiate(constructables[i],transform.position+placeVector,Quaternion.identity);
+		newUnit.GetComponent(DoStuff).controller=controller;
 	}
 }
 
@@ -38,11 +39,11 @@ nextInQueue=null;
 
 if(timer.turn=="plan"){
 if(selected){
-var stickVector=Vector2(Input.GetAxisRaw("Horizontal1"),Input.GetAxisRaw("Vertical1"));
+var stickVector=Vector2(Input.GetAxisRaw("MoveHoriz"),Input.GetAxisRaw("MoveVert"));
 buildGuidePlane.position.y=transform.position.y;
 if (stickVector.magnitude>.9){
 var stickAngle=Vector2.Angle(Vector2.right,stickVector);
-if (Input.GetAxisRaw("Vertical1")<0.0){stickAngle=360.0-stickAngle;}
+if (Input.GetAxisRaw("MoveVert")<0.0){stickAngle=360.0-stickAngle;}
 Debug.Log(stickAngle);
 var toBuildIndex=Mathf.RoundToInt(stickAngle/360*constructables.Length);
 stickAngle=toBuildIndex*360/constructables.Length;
@@ -53,7 +54,7 @@ var stickVector3=Vector3(stickVector.x,0,stickVector.y);
 	Debug.Log(toBuildIndex);
 	if(toBuildIndex==constructables.Length){toBuildIndex=0;}
 	nextInQueue=constructables[toBuildIndex];
-var stick2Vector=Vector3(Input.GetAxisRaw("Horizontal2"),0,Input.GetAxisRaw("Vertical2"));
+var stick2Vector=Vector3(Input.GetAxisRaw("AtkHoriz"),0,Input.GetAxisRaw("AtkVert"));
 if(stick2Vector.magnitude>.5){outputLocation=stick2Vector.normalized;}
 outputLocation=stickVector3;
 }

@@ -59,7 +59,7 @@ function Update () {
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
 			}
 			if(Input.GetButtonDown("Deselect")){
-					moveDir=Vector3.zero;
+					moveDir = Vector3.zero;
 			}
 			
 			// Get attack direction from axis 2
