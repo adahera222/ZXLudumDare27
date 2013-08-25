@@ -41,6 +41,7 @@ function Start() {
 function Update () {
 	if(hp <= 0) {
 		unitList.units.Remove(gameObject);
+		unitList.currUnit--;
 		Destroy(gameObject);
 	}
 	if(selected)

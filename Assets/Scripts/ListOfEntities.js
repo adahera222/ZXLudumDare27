@@ -14,6 +14,8 @@ function Start() {
 }
 
 function Update() {
+	if (currUnit<0){currUnit=units.length;}
+	else if (currUnit>=units.length){currUnit=0;}
 	var tempUnit : GameObject;
 	if(timer.turn == "plan") {
 		if(Input.GetButtonDown("Units")) {
@@ -67,15 +69,17 @@ function Previous() {
 }
 
 function BeginTurn() {
-	if(units.length > 0) {
-		if(selectMod=="Units"){
-			var tempUnit : GameObject = units[currUnit];
-			tempUnit.GetComponent(DoStuff).selected = true;
-			Camera.main.transform.position.x = tempUnit.transform.position.x;
-			Camera.main.transform.position.z = tempUnit.transform.position.z;
-		}
+	Debug.Log("is this code running?");
+	//if(units.length > 0) {
+	if(selectMod=="Units"){
+		var tempUnit : GameObject = units[currUnit];
+		tempUnit.GetComponent(DoStuff).selected = true;
+		Camera.main.transform.position.x = tempUnit.transform.position.x;
+		Camera.main.transform.position.z = tempUnit.transform.position.z;
+	//	}
 	}
 	if(selectMod=="Construct"){
+
 		Camera.main.transform.position.x = homeBase.GetComponent(Transform).position.x;
 		Camera.main.transform.position.z = homeBase.GetComponent(Transform).position.z;
 	}

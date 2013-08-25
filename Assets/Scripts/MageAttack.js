@@ -12,14 +12,14 @@ function Update() {
 	if(stuffComp.timerObj.turn == "exec") {
 		// Get all units and stuff in a sphere
 		var sphereHits : Collider[] = Physics.OverlapSphere(transform.position, 1.5);
-		Debug.Log(sphereHits.Length);
+		//Debug.Log(sphereHits.Length);
 		// If there are some units, iterate through them.
 		if(sphereHits.Length > 0) {
 			var enemyPresent = false;
 			for(hitfo in sphereHits) {
 				// Compare tags'n'such
-				var hitfoTag = hitfo.collider.gameObject.tag;
-				if(hitfoTag != gameObject.tag && hitfoTag != "Env") {
+				var hitfoTag = hitfo.collider.tag;
+				if(hitfoTag != gameObject.tag && (hitfoTag == "Player1Unit"||hitfoTag=="Player2Unit") ) {
 					// Turn on the FREAKIN' EPIC particle system
 					emitter.Play();
 					// Note that we got an enemy
