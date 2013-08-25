@@ -4,25 +4,20 @@ var units = new Array();
 var currUnit = 0;
 var timer : Timer;
 
-function Start(){
+function Start() {
 	timer = gameObject.GetComponent(Timer);
 }
 
-function Update(){
+function Update() {
 	if(timer.turn=="plan"){
-		if(Input.GetButtonDown("Previous")) {
-			Debug.Log("Previous called...");
+		if(Input.GetButtonDown("Previous"))
 			Previous();
-		}
-		if(Input.GetButtonDown("Next")) {
-			Debug.Log("Next called...");
+		if(Input.GetButtonDown("Next"))
 			Next();
-		}
 	}
 }
 
 function Next() {
-	Debug.Log("Next invoked.");
 	var tempUnit : GameObject = units[currUnit];
 	tempUnit.GetComponent(DoStuff).selected = false;
 	currUnit++;
@@ -32,7 +27,6 @@ function Next() {
 }
 
 function Previous() {
-	Debug.Log("Previous invoked");
 	var tempUnit : GameObject = units[currUnit];
 	tempUnit.GetComponent(DoStuff).selected = false;
 	currUnit-=1;

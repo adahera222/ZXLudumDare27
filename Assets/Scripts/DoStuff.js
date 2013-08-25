@@ -11,9 +11,9 @@ var selected = false;
 // Pretty self-explanitory - can it move? Controlled externally (mostly)
 var canMove = true;
 // Max hp (potentially unused)
-var maxHp = 2;
+var maxHp = 2f;
 // Current hp
-var hp = 2;
+var hp = 2f;
 
 /* Controller Data */
 // Controller object, set in inspector
@@ -100,7 +100,7 @@ function Update () {
 	arrow.position = transform.position + moveDir;
 }
 
-function OnTriggerStay(collide : Collider) {
+function OnCollisionStay(collide : Collision) {
 	// If it's a projectile from the other team, take some damage
 	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
 		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {

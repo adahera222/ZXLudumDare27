@@ -22,7 +22,7 @@ function Update() {
 		atkCurr -= Time.deltaTime;
 }
 
-function OnTriggerStay(collide : Collider) {
+function OnCollisionStay(collide : Collision) {
 	// If it's on your team, don't shoot and don't collide
 	if(collide.gameObject.tag == gameObject.tag)
 		return;
@@ -51,7 +51,7 @@ function OnTriggerStay(collide : Collider) {
 	}
 }
 
-function OnTriggerExit() {
+function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
 	stuffComp.canMove = true;
 }

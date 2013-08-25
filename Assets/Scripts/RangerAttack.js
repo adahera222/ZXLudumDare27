@@ -27,11 +27,12 @@ function Update() {
 		var hitfo : RaycastHit;
 		Debug.DrawRay(transform.position, stuffComp.atkDir * 10, Color.white);
 		if(Physics.Raycast(transform.position, stuffComp.atkDir, hitfo, 10)) {
-			if(hitfo.collider.gameObject.tag != gameObject.tag && hitfo.collider.gameObject.tag != "Projectile") {
+			if(hitfo.collider.gameObject.tag != gameObject.tag && hitfo.collider.gameObject.name != "Projectile(Clone)") {
 				// Maek a new arrow
 				var proj : Rigidbody;
 				proj = Instantiate(projectile, transform.position + stuffComp.atkDir * 1.2, Quaternion.identity);
 				proj.transform.up = stuffComp.atkDir;
+				proj.gameObject.layer = 2;
 				proj.velocity = stuffComp.atkDir * 5;
 				// Set projectile's tag based on unit's tag
 				switch(gameObject.tag) {
@@ -52,15 +53,15 @@ function Update() {
 	}
 }
 
-function OnTriggerStay(collide : Collider) {
-	// If it's a tree or they're on your team, don't shoot
-	if(collide.gameObject.tag == "Env" || collide.gameObject.tag == gameObject.tag)
+function OnCollisionStay(collide : Collision) {
+	// If it's on your team, don't shoot and don't collide
+	if(collide.gameObject.tag == gameObject.tag)
 		return;
 
 	stuffComp.canMove = false;
 }
 
-function OnTriggerExit() {
+function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
 	stuffComp.canMove = true;
 }
