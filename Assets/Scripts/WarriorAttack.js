@@ -23,12 +23,16 @@ function Update() {
 }
 
 function OnTriggerStay(collide : Collider) {
-	// If it's a tree or they're on your team, don't shoot
-	if(collide.gameObject.tag == "Env" || collide.gameObject.tag == gameObject.tag)
+	// If it's on your team, don't shoot and don't collide
+	if(collide.gameObject.tag == gameObject.tag)
 		return;
 
+	// If it's a tree, don't shoot but do collide
 	stuffComp.canMove = false;
+	if(collide.gameObject.tag == "Env")
+		return;
 
+	// Otherwise, OPEN THE DANG FIRE
 	if(atkCurr <= 0)
 	{
 		// Get angle of rightmost bound

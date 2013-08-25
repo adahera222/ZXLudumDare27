@@ -99,3 +99,12 @@ function Update () {
 	arrow.rotation = Quaternion.LookRotation(-moveDir);
 	arrow.position = transform.position + moveDir;
 }
+
+function OnTriggerStay(collide : Collider) {
+	// If it's a projectile from the other team, take some damage
+	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
+		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
+		hp -= 1;
+		Destroy(collide.gameObject);
+	}
+}
