@@ -42,9 +42,9 @@ function Start() {
 }
 
 function Update () {
-	if(!canMove){
-	rigidbody.velocity=Vector3.zero;
-	}
+	//if(!canMove){
+	//rigidbody.velocity=Vector3.zero;
+	//}
 	if(hp <= 0) {
 		unitList.units.Remove(gameObject);
 		unitList.currUnit--;
@@ -119,13 +119,13 @@ function Update () {
 }
 
 function OnCollisionStay(collide : Collision) {
-Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they're not colliding?
+//Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they're not colliding?
 	// If it's a projectile from the other team, take some damage
-	if (collide.collider.tag=="Env"){
-	Debug.Log("with a wall");
-	transform.position-=moveDir*.01;
+	//if (collide.collider.tag=="Env"){
+	//Debug.Log("with a wall");
+	//transform.position-=moveDir*.01;
 	//moveDir=Vector3.zero;
-	canMove=false;}
+	//canMove=false;}
 	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
 		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
 		hp -= 1;
@@ -134,12 +134,12 @@ Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they'r
 }
 
 function OnCollisionEnter(collide:Collision){
-	Debug.Log("Collided");
-	if (collide.gameObject.tag=="Env"){
-	Debug.Log("with a wall");
-	transform.position-=moveDir*Time.deltaTime;
-	moveDir=Vector3.zero;
-	canMove=false;}//seems like it should fix the problem.
+	//Debug.Log("Collided");
+	//if (collide.gameObject.tag=="Env"){
+	//Debug.Log("with a wall");
+	//transform.position-=moveDir*Time.deltaTime;
+	//moveDir=Vector3.zero;
+	//canMove=false;}//seems like it should fix the problem.
 }
 
 function takeDamage(damage:float){

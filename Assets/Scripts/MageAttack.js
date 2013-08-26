@@ -37,13 +37,13 @@ function Update() {
 
 function OnCollisionStay(collide : Collision) {
 	// If it's on your team, don't shoot and don't collide
-	if(collide.gameObject.tag == gameObject.tag)
-		return;
+	//if(collide.gameObject.tag == gameObject.tag)
+	//	return;
 
 	// If it's a tree, don't shoot but do collide
-	stuffComp.canMove = false;
-	if(collide.gameObject.tag == "Env")
-		return;
+	//stuffComp.canMove = false;
+	//if(collide.gameObject.tag == "Env")
+	//	return;
 }
 
 function OnCollisionExit() {

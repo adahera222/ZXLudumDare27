@@ -29,7 +29,7 @@ Debug.Log("Is any of this getting called?");
 		return;
 
 	// If it's a tree, don't shoot but do collide
-	stuffComp.canMove = false;
+	//stuffComp.canMove = false;
 	if(collide.gameObject.tag == "Env")
 		return;
 

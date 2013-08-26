@@ -27,7 +27,7 @@ function Update() {
 		var hitfo : RaycastHit;
 		Debug.DrawRay(transform.position, stuffComp.atkDir * 10, Color.white);
 		if(Physics.Raycast(transform.position, stuffComp.atkDir, hitfo, 10)) {
-			if(hitfo.collider.gameObject.tag != gameObject.tag && hitfo.collider.gameObject.name != "Projectile(Clone)") {
+			if(hitfo.collider.tag != gameObject.tag &&(hitfo.collider.tag=="Player1Unit"||hitfo.collider.tag=="Player2Unit")) {
 				// Maek a new arrow
 				var proj : Rigidbody;
 				proj = Instantiate(projectile, transform.position + stuffComp.atkDir * 1.2, Quaternion.identity);
@@ -55,13 +55,13 @@ function Update() {
 
 function OnCollisionStay(collide : Collision) {
 	// If it's on your team, don't shoot and don't collide
-	if(collide.gameObject.tag == gameObject.tag)
-		return;
+	//if(collide.gameObject.tag == gameObject.tag)
+	//	return;
 
-	stuffComp.canMove = false;
+	//stuffComp.canMove = false;
 }
 
 function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
-	stuffComp.canMove = true;
+	//stuffComp.canMove = true;
 }
