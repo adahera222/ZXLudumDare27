@@ -29,7 +29,7 @@ function Update () {
 	if(hp<0){
 	//Die fantastically;
 	GetComponent(ParticleSystem).Play();
-	controller.iLose=true;
+	controller.GetComponent(ListOfEntities).iLose=true;
 	}
 	else{
 		if (timer.turn=="exec"){
