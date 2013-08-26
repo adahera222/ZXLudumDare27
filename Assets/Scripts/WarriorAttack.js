@@ -23,15 +23,15 @@ function Update() {
 }
 
 function OnCollisionStay(collide : Collision) {
-Debug.Log("Is any of this getting called?");
+//Debug.Log("Is any of this getting called?");
 	// If it's on your team, don't shoot and don't collide
 	if(collide.gameObject.tag == gameObject.tag)
 		return;
 
 	// If it's a tree, don't shoot but do collide
-	//stuffComp.canMove = false;
 	if(collide.gameObject.tag == "Env")
 		return;
+	//stuffComp.canMove = false;
 
 	// Otherwise, OPEN THE DANG FIRE
 	if(atkCurr <= 0)
@@ -55,4 +55,10 @@ Debug.Log("Is any of this getting called?");
 function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
 	stuffComp.canMove = true;
+}
+
+function OnGUI(){
+if(stuffComp.selected){
+GUI.Label(Rect(0,50,Screen.currentResolution.width,50),"A warrior. Attacks when touching an opponent. Currently at "+stuffComp.hp+" hitpoints.");
+}
 }

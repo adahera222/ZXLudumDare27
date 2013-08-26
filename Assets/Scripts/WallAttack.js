@@ -22,3 +22,9 @@ function OnCollisionStay (collide:Collision) {
 function OnCollisionExit(){
 //stuffComp.canMove=true;//feels like it should be part of DoStuff, but we'll fix that after LD.//Definitely a reason to use spheres or cylinders for the colliders so corners do not get stuck. 
 }
+
+function OnGUI(){
+if(stuffComp.selected){
+GUI.Label(Rect(0,50,Screen.currentResolution.width,50),"A wall. Does not attack, but can take a lot of damage. Currently at "+stuffComp.hp+" hitpoints.");
+}
+}

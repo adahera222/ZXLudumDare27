@@ -12,11 +12,11 @@ function Update () {
 }
 
 function LookSelected(){
-transform.position.z-=.5;//change textures and stuff
+transform.position.z-=1;//change textures and stuff
 }
 
 function LookUnSelected(){
-transform.position.z+=.5;
+transform.position.z+=1;
 }
 
 function OnMouseOver(){//only if you have a mouse

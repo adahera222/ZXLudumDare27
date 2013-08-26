@@ -53,11 +53,11 @@ function Update () {
 	if(timer.turn=="plan"){
 		if(selected){
 			var stickVector=Vector2(Input.GetAxisRaw("MoveHoriz"),Input.GetAxisRaw("MoveVert"));
-			buildGuidePlane.position.y=transform.position.y;
+			buildGuidePlane.position.y=transform.position.y-.1;
 			if (stickVector.magnitude>.9){
 				var stickAngle=Vector2.Angle(Vector2.right,stickVector);
 				if (Input.GetAxisRaw("MoveVert")>0.0){stickAngle=360.0-stickAngle;}
-				Debug.Log(stickAngle);
+				//Debug.Log(stickAngle);
 				var toBuildIndex=Mathf.RoundToInt(stickAngle/360*constructables.Length);
 				stickAngle=toBuildIndex*360/constructables.Length;
 				stickVector=Vector2(Mathf.Cos(stickAngle*Mathf.PI/180),Mathf.Sin(stickAngle*Mathf.PI/180));
@@ -91,6 +91,9 @@ hp-=damage;
 }
 
 function OnGUI(){
+if(selected){
+GUI.Label(Rect(0,50,Screen.currentResolution.width,50),"Your home base! Defend it! Left stick or WASD selects the Unit to build. Currently at "+hp+" hitpoints. You lose if this drops to 0!");
+}
 if (hp<0){
 GUI.DrawTexture(Rect(0,0,Screen.currentResolution.width,Screen.currentResolution.height),loseTexture,ScaleMode.ScaleToFit);
 }

@@ -50,3 +50,9 @@ function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
 	stuffComp.canMove = true;
 }
+
+function OnGUI(){
+if(stuffComp.selected){
+GUI.Label(Rect(0,50,Screen.currentResolution.width,50),"A mage. surrounds himself with fire when near an opponent. Currently at "+stuffComp.hp+" hitpoints.");
+}
+}

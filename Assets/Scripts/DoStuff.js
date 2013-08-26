@@ -42,9 +42,9 @@ function Start() {
 }
 
 function Update () {
-	//if(!canMove){
-	//rigidbody.velocity=Vector3.zero;
-	//}
+	if(!canMove){
+	rigidbody.velocity=Vector3.zero;
+	}
 	if(hp <= 0) {
 		unitList.units.Remove(gameObject);
 		unitList.currUnit--;

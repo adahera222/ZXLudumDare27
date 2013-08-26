@@ -65,3 +65,9 @@ function OnCollisionExit() {
 	// Awesome, he's dead. You can move again.
 	//stuffComp.canMove = true;
 }
+
+function OnGUI(){
+if(stuffComp.selected){
+GUI.Label(Rect(0,50,Screen.currentResolution.width,50),"A Ranger. Fires arrows when it sees an opponent within its ten-meter range (units are one meter wide). Currently at "+stuffComp.hp+" hitpoints.");
+}
+}

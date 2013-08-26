@@ -24,7 +24,11 @@ function Update() {
 			tempUnit = units[currUnit];
 			tempUnit.GetComponent(DoStuff).selected = true;
 		}
-		else if(Input.GetButtonDown("Construct")) {selectMod = "Construct";}
+		else if(Input.GetButtonDown("Construct")) {
+			selectMod = "Construct";
+			tempUnit = units[currUnit];
+			tempUnit.GetComponent(DoStuff).selected = false;
+		}
 		//else if(Input.GetButtonDown("Harvesters")) {selectMod = "Harvesters";}
 		if(selectMod=="Units") {
 			tempUnit = units[currUnit];
