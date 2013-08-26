@@ -14,7 +14,7 @@ function Start() {
 }
 
 function Update() {
-	if (currUnit<0){currUnit=units.length;}
+	if (currUnit<0){currUnit=units.length-1;}
 	else if (currUnit>=units.length){currUnit=0;}
 	var tempUnit : GameObject;
 	if(timer.turn == "plan") {
@@ -34,17 +34,18 @@ function Update() {
 			if(Input.GetButtonDown("Next"))
 				Next();
 		}
+		if (selectMod=="Construct") {
+			homeBase.selected = true;
+			Camera.main.transform.position.x = homeBase.GetComponent(Transform).position.x;
+			Camera.main.transform.position.z = homeBase.GetComponent(Transform).position.z;
+		}
+	else {homeBase.selected=false;}
 	}
 	else {
 		tempUnit = units[currUnit];
 		tempUnit.GetComponent(DoStuff).selected = false;
 	}
-	if (selectMod=="Construct") {
-		homeBase.selected = true;
-		Camera.main.transform.position.x = homeBase.GetComponent(Transform).position.x;
-		Camera.main.transform.position.z = homeBase.GetComponent(Transform).position.z;
-	}
-	else {homeBase.selected=false;}
+	
 	//if(selectMod == "harvesters") {
 		//DoStuff with harvesters
 	//}
@@ -69,7 +70,6 @@ function Previous() {
 }
 
 function BeginTurn() {
-	Debug.Log("is this code running?");
 	//if(units.length > 0) {
 	if(selectMod=="Units"){
 		var tempUnit : GameObject = units[currUnit];

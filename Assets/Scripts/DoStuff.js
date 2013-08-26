@@ -28,6 +28,8 @@ var unitList : ListOfEntities;
 var mat : Renderer;
 // Used to show intended direction, set in inspector
 var arrow : Transform;
+//Hold position, used to counteract physics and allow collisions.
+var holdPos : Vector3;
 
 function Start() {
 	// Get all the controller components for future reference
@@ -36,9 +38,13 @@ function Start() {
 	mat = gameObject.GetComponent(Renderer);
 	// Add yourself to the list of units
 	unitList.units.Add(gameObject);
+	holdPos=transform.position;
 }
 
 function Update () {
+	if(!canMove){
+	rigidbody.velocity=Vector3.zero;
+	}
 	if(hp <= 0) {
 		unitList.units.Remove(gameObject);
 		unitList.currUnit--;
@@ -85,7 +91,9 @@ function Update () {
 	
 		// Apply movement in moveDir
 		if(canMove)
-			transform.position += moveDir * Time.deltaTime;
+			rigidbody.velocity=moveDir;
+			//transform.position += moveDir * Time.deltaTime;
+			
 		
 		// And action isn't used for now, so...
 	}
@@ -94,6 +102,12 @@ function Update () {
 	if(timerObj.turn == "wait" && timerObj.prevTurn == "exec") {
 		// You can potentially go in a new direction
 		canMove = true;
+	}
+	else if(timerObj.turn=="plan"){
+	if((holdPos-transform.position).magnitude<.1){
+	rigidbody.velocity=Vector3.zero;
+	transform.position=holdPos;}
+	holdPos=transform.position;
 	}
 	
 	// Rotate unit to look towards atkDir
@@ -107,6 +121,11 @@ function Update () {
 function OnCollisionStay(collide : Collision) {
 Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they're not colliding?
 	// If it's a projectile from the other team, take some damage
+	if (collide.collider.tag=="Env"){
+	Debug.Log("with a wall");
+	transform.position-=moveDir*Time.deltaTime;
+	moveDir=Vector3.zero;
+	canMove=false;}
 	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
 		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
 		hp -= 1;
