@@ -123,8 +123,8 @@ Debug.Log("CollisionStay");//Maybe because we're not using physics stuff, they'r
 	// If it's a projectile from the other team, take some damage
 	if (collide.collider.tag=="Env"){
 	Debug.Log("with a wall");
-	transform.position-=moveDir*Time.deltaTime;
-	moveDir=Vector3.zero;
+	transform.position-=moveDir*.01;
+	//moveDir=Vector3.zero;
 	canMove=false;}
 	if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
 		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
@@ -140,4 +140,8 @@ function OnCollisionEnter(collide:Collision){
 	transform.position-=moveDir*Time.deltaTime;
 	moveDir=Vector3.zero;
 	canMove=false;}//seems like it should fix the problem.
+}
+
+function takeDamage(damage:float){
+hp-=damage;
 }

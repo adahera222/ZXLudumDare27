@@ -46,7 +46,7 @@ Debug.Log("Is any of this getting called?");
 		var enemyVect = collide.transform.position - gameObject.transform.position;
 		// Compare angles
 		if(Vector3.Angle(rightVect, enemyVect) <= atkAngle && Vector3.Angle(leftVect, enemyVect) <= atkAngle)
-			collide.gameObject.GetComponent(DoStuff).hp -= 1;
+			collide.gameObject.SendMessage("takeDamage",1f);
 		// Reset the cooldown
 		atkCurr = atkCool;
 	}

@@ -5,7 +5,7 @@ var currUnit = 0;
 var timer : Timer;
 var selectMod="Units";
 var homeBase : BaseScript;
-var playerNum:int;
+var iLose:boolean;
 
 function Start() {
 	timer = gameObject.GetComponent(Timer);
@@ -14,6 +14,7 @@ function Start() {
 }
 
 function Update() {
+	if(!iLose){
 	if (currUnit<0){currUnit=units.length-1;}
 	else if (currUnit>=units.length){currUnit=0;}
 	var tempUnit : GameObject;
@@ -50,7 +51,7 @@ function Update() {
 		//DoStuff with harvesters
 	//}
 }
-
+}
 function Next() {
 	var tempUnit : GameObject = units[currUnit];
 	tempUnit.GetComponent(DoStuff).selected = false;

@@ -10,6 +10,10 @@ var nextInQueue:GameObject;
 var outputLocation:Vector3;
 var timer:Timer;
 var controller:GameObject;
+var hp=20f;
+
+//when you lose, show a texture;
+var loseTexture:Texture;
 
 function Start () {
 buildGuidePlane.position.y=20;
@@ -22,6 +26,12 @@ buildGuidePlane.position.y=20;
 }
 
 function Update () {
+	if(hp<0){
+	//Die fantastically;
+	GetComponent(ParticleSystem).Play();
+	controller.iLose=true;
+	}
+	else{
 		if (timer.turn=="exec"){
 			selected=false;
 		if(currentBuild){
@@ -65,4 +75,23 @@ function Update () {
 		else{buildGuidePlane.position.y=20;}
 	}
 	else{buildGuidePlane.position.y=20;}
+	}
+}
+
+function OnCollisionStay(collide:Collision){
+if(gameObject.tag == "Player1Unit" && collide.gameObject.tag == "Player2Proj"
+		|| gameObject.tag == "Player2Unit" && collide.gameObject.tag == "Player1Proj") {
+		takeDamage(1);
+		Destroy(collide.gameObject);
+	}
+}
+
+function takeDamage(damage:float){
+hp-=damage;
+}
+
+function OnGUI(){
+if (hp<0){
+GUI.DrawTexture(Rect(0,0,Screen.currentResolution.width,Screen.currentResolution.height),loseTexture,ScaleMode.ScaleToFit);
+}
 }

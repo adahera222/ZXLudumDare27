@@ -25,7 +25,7 @@ function Update() {
 					// Note that we got an enemy
 					enemyPresent = true;
 					// Do damage at a rate of 1/s
-					hitfo.collider.GetComponent(DoStuff).hp -= Time.deltaTime;
+					hitfo.collider.SendMessage("takeDamage",Time.deltaTime);
 				}
 			}
 			// If we didn't get an enemy, turn the FREAKIN' EPIC partical system off :(
