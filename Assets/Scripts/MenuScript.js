@@ -16,11 +16,11 @@ for(var i=0;i<buttons.length;i+=1){
 function Update () {
 
 
-if (Input.GetAxisRaw("Vertical1")>.5){
+if (Input.GetAxisRaw("MoveVert")>.5){
 	if(!selectedLast){setSelected(selectedButton+1);}
 	selectedLast=true;
 }
-else if (Input.GetAxisRaw("Vertical1")<-.5){
+else if (Input.GetAxisRaw("MoveVert")<-.5){
 	if(!selectedLast){setSelected(selectedButton-1);}
 	selectedLast=true;
 }
