@@ -11,8 +11,9 @@ Platform assembly: C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\
 Loading C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.082 seconds
+- Completed reload, in  0.056 seconds
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\Player one\Documents\GitHub\ZXLudumDare27\test_Data\Managed\Boo.Lang.dll (this message is harmless)

@@ -80,8 +80,9 @@ function Update () {
 		}
 	}
 	else {
-		// He's red, Jim!
-		mat.material.color = Color.red;
+			// He's red, Jim!
+		if(tag=="Player1Unit"){mat.material.color = Color.red;}
+		else{mat.material.color = Color.blue;}
 	}
 		
 	// If we're in the exec step, execute actions

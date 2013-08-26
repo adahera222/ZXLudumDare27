@@ -37,9 +37,9 @@ case 0:
 	Application.Quit();
 	break;
 case 1:
-	Application.LoadLevel(1);
+	Application.LoadLevel(2);
 	break;
-default://options? maybe buy other maps eventually?
+default://options? maybe buy(Ouya) other maps eventually?
 	Debug.Log("You fail standing up school");//mr. blah
 }
 }

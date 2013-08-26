@@ -3,7 +3,7 @@
 // Make default values
 var turnTime = 10;
 var waitTime = 5;
-var currTime = 0f;
+var currTime = 2.8;
 var prevTurn = "exec";
 var turn = "wait";
 
