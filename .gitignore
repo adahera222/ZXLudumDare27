@@ -3,7 +3,6 @@
 *.csproj
 *.pidb
 *.unityproj
-*.exe
 .DS_Store
 Library
 /obj
