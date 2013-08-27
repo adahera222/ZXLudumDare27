@@ -60,7 +60,7 @@ function Update () {
 			// Get movement from axis 1. != so that it doesn't set it while the stick is neutral
 			var moveHor = Input.GetAxisRaw("MoveHoriz");
 			var moveVert = Input.GetAxisRaw("MoveVert");
-			if(moveHor != 0 || moveVert != 0) {
+			if(Vector2(moveHor,moveVert).magnitude>.2) {
 				moveDir.x = moveHor;
 				moveDir.z = -moveVert; // Because the Ouya controller is weird.
 				moveDir.Normalize(); // Normalize so we get a magnitude of one.
