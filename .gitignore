@@ -5,6 +5,6 @@
 *.unityproj
 *.exe
 .DS_Store
-/Library
+Library
 /obj
 /Temp
